@@ -1,54 +1,80 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {  AuthService} from 'src/app/share/services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
+export class LoginComponent implements OnInit {
+  loginCheck: boolean;
+  registerForm: FormGroup;
+  login: FormGroup;
+  submitted = false;
 
-
-export class LoginComponent implements OnInit{
-  loginCheck: boolean
-  registerFrom: FormGroup
-  login: FormGroup
-  error: string
-  fromRegister = ''
-  constructor(private router : Router, private formBuilder: FormBuilder){}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-  this.loginCheck = true
+    this.loginCheck = true;
 
-  this.login = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-  })
-    
-   
+    this.login = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required,]],
+    });
 
-  this.registerFrom = this.formBuilder.group({
-    username: ['', Validators.required],
-    fullname: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-    birthdate: ['', Validators.required],
-    deposit: ['', Validators.required],
-  })
-    
+    this.registerForm = this.formBuilder.group({
+      fullname: ['', Validators.required],
+      phone: ['',[ Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+      dob: ['', Validators.required,],
+      deposit: ['', Validators.required],
+    });
+  }
+  get f() { return this.registerForm.controls; }
+
+  onLogin() {
+    this.submitted = true;
+    this.authService.login(this.login.value).subscribe((resUser) => {
+      if (!!resUser) {
+        sessionStorage.setItem('user', JSON.stringify(resUser));
+        this.router.navigate(['dashboard']);
+        console.log('usuario loggeado');
+      }else
+      console.log('Usuario no encontrado');
+    });
   }
 
-  userLogin(){
+  onRegister() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.registerForm.invalid) {
+        return;
+    }else
+
+    this.authService
+      .register(this.registerForm.value)
+      .subscribe((resLogin) => {
+        if (!!resLogin) {
+          console.log('registrado');
+          this.loginCheck = !this.loginCheck;
+          this.registerForm.reset();
+        } else {
+          console.error('Usuario no loggeado.');
+        }
+      })
   }
 
-
-  onRegister(){ 
-   }
- 
-
-  checkLogin(){
-    this.loginCheck = !this.loginCheck
+  checkLogin() {
+    this.loginCheck = !this.loginCheck;
+    this.registerForm.reset();
   }
-
 }
