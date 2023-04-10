@@ -1,14 +1,41 @@
-.toolbar-spacer {
-    flex:  1 auto;
-  }
-.tilte{
-    font-size: 35px;
+.toolbar-spacer{
+  flex:  1 auto;
 }
-.container-img{
+.tilte {
+  font-size: 35px;
+}
+.main-body{
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 80px;
+  max-width:60%;
+  mat-form-field, .container-table{
     width: 100%;
-    height: 93.4%;
-    background-image: url("../../../../assets/img/dashboarh.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: right;
-    background-attachment: local;}
+  }
+}
+table.mat-table {
+text-align: center;
+  width: 100%;
+}
+::ng-deep .mat-sort-header-content {
+  margin-left: 76px;
+  text-align: left;
+  align-items: center;
+  font-weight: 500;
+  font-size: 21px;
+}
+
+ .container-img{
+  width: 100%;
+  height: 93.4%;
+  background-image: url("../../../../assets/img/fondo.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right;
+  background-attachment: local;}
+
+
+#deposit{
+margin-left: 400px;
+}
+

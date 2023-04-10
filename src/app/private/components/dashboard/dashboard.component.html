@@ -1,10 +1,53 @@
-
- <mat-toolbar>
-        <span class="tilte">MyCryptowallet</span>
+<mat-toolbar>
+        <span class="tilte">My CryptoWallet</span>
+      
         <span class="toolbar-spacer"></span>
-        <button mat-raised-button color="warn" (click)="logOut()" >cerrar Sesión</button>
+        <button mat-raised-button color="warn" (click)="logOut()">cerrar Sesión</button>
 </mat-toolbar>
-<div class="container-img">
-   
 
+<div class="container-img">
+   <div class="main-body">
+          <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="filter($event)" placeholder="Ex. Mia" #input>
+          </mat-form-field>
+            <table mat-table [dataSource]="dataSource" matSort>
+              <ng-container matColumnDef= "crypto_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                <td mat-cell *matCellDef="let row"> 
+                  <img [src]="iconImg(row.crypto_name)"> {{row.crypto_name}}
+                </td>
+              </ng-container>
+      
+              <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor</th>
+                <td mat-cell *matCellDef="let row"> {{row.value}} </td>
+              </ng-container>
+      
+              <ng-container matColumnDef="stock">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock </th>
+                <td mat-cell *matCellDef="let row"> {{row.stock}} {{row.asset}}</td>
+              </ng-container>
+              <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> cantidad </th>
+                <td mat-cell *matCellDef="let row"> {{row.amount}} </td>
+              </ng-container>
+              <ng-container matColumnDef="transactions">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Transacciones</th>
+                <td mat-cell *matCellDef="let row">
+                     <button mat-raised-button  color="primary" (click)=" openDialogBuy()">Comprar</button>
+                     <button mat-raised-button  color="warn">Vender</button>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+              </tr>
+            </table>
+      
+            <mat-paginator [pageSizeOptions]="[7, 7]" aria-label="Select page of users"></mat-paginator>
+        
+    </div>
 </div>

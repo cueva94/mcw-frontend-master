@@ -48,10 +48,13 @@ export class LoginComponent implements OnInit {
 
 
   onLogin() {
+    
       this.authService.login(this.login.value).subscribe((resUser) => {
       if (!!resUser) {
-        sessionStorage.setItem('user', JSON.stringify(resUser))
+      sessionStorage.setItem('resUser', JSON.stringify(resUser))
+        this.router.navigate(['dashboard'])
          console.log('usuario loggeado');
+         console.log(resUser)
       }else 
       console.log('Usuario no encontrado');
     })
@@ -81,14 +84,14 @@ export class LoginComponent implements OnInit {
     this.registerForm.reset();
   }
 
-  onLoading(){
+/*    onLoading(){
     this.loadingCheck = !this.loadingCheck
 
       if(this.loading = true) 
      setTimeout(()=>{
       this.loading = false
-     this.router.navigate(['dashboard'])
-     },3000) 
-  } 
+      this.router.navigate(['dashboard'])
+     },3000)
+  }  */ 
  
 }

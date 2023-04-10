@@ -6,11 +6,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './share/share.module';
 import { DashboardComponent } from './private/components/dashboard/dashboard.component';
 import { LoginComponent } from './public/components/login/login.component';
+import { DialogBuyComponent } from '../app/private/components/dialog-buy/dialog-buy.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    DialogBuyComponent
+
 
   ],
   imports: [
