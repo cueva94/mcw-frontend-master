@@ -11,9 +11,12 @@ import {  AuthService} from 'src/app/share/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginCheck: boolean;
+  loadingCheck: boolean
   registerForm: FormGroup;
   login: FormGroup;
   submitted = false;
+  loading =true
+  
 
   constructor(
     private router: Router,
@@ -22,7 +25,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    
     this.loginCheck = true;
+    this.loadingCheck = true;
 
     this.login = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -37,29 +42,27 @@ export class LoginComponent implements OnInit {
       dob: ['', Validators.required,],
       deposit: ['', Validators.required],
     });
+
   }
   get f() { return this.registerForm.controls; }
 
+
   onLogin() {
-    this.submitted = true;
-    this.authService.login(this.login.value).subscribe((resUser) => {
+      this.authService.login(this.login.value).subscribe((resUser) => {
       if (!!resUser) {
-        sessionStorage.setItem('user', JSON.stringify(resUser));
-        this.router.navigate(['dashboard']);
-        console.log('usuario loggeado');
-      }else
+        sessionStorage.setItem('user', JSON.stringify(resUser))
+         console.log('usuario loggeado');
+      }else 
       console.log('Usuario no encontrado');
-    });
+    })
   }
 
   onRegister() {
     this.submitted = true;
-
-    // stop here if form is invalid
+   
     if (this.registerForm.invalid) {
         return;
     }else
-
     this.authService
       .register(this.registerForm.value)
       .subscribe((resLogin) => {
@@ -77,4 +80,15 @@ export class LoginComponent implements OnInit {
     this.loginCheck = !this.loginCheck;
     this.registerForm.reset();
   }
+
+  onLoading(){
+    this.loadingCheck = !this.loadingCheck
+
+      if(this.loading = true) 
+     setTimeout(()=>{
+      this.loading = false
+     this.router.navigate(['dashboard'])
+     },3000) 
+  } 
+ 
 }
