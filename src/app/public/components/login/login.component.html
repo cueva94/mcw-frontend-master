@@ -13,16 +13,10 @@
             <mat-form-field appearance="outline">
               <mat-label>Email</mat-label>
               <input matInput placeholder="Email" formControlName="email">
-              <div class="alert alert-danger" role="alert" *ngIf="submitted && f.email.errors">
-                <div *ngIf="f.email.errors.required">Email Obligatorio</div>
-              </div>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>Password</mat-label>
               <input type="password" matInput placeholder="Password" formControlName="password">
-              <div class="alert alert-danger" role="alert" *ngIf="submitted && f.password.errors">
-                <div *ngIf="f.password.errors.required">Contraseña Obligatorio</div>
-              </div>
             </mat-form-field>
             <div>
               <button class="button-login" mat-button>Login</button>

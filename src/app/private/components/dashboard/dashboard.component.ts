@@ -109,6 +109,7 @@ loadingCheck: boolean
   iconImg (name: String){
     return `../../../assets/crypto/${name}.png`
   }
+  
   logOut(){
     sessionStorage.removeItem('user')
    this.router.navigate(['login'])

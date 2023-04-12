@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
     this.loginCheck = true;
     this.loadingCheck = false;
 
@@ -48,19 +47,17 @@ export class LoginComponent implements OnInit {
 
 
   onLogin() {
-      this.loadingCheck = true
+ 
       this.authService.login(this.login.value).subscribe((resUser) => {
       if (!!resUser) {
       sessionStorage.setItem('user', JSON.stringify(resUser))
       console.log(JSON.stringify(resUser))
-      /* if(this.loginCheck)
+        if(this.loadingCheck = true)
       setTimeout(() => {
         this.router.navigate(['dashboard'])
-        this.loadingCheck = false
-      }, 1500) */
+      }, 1500) 
          console.log('usuario loggeado');
-      }else 
-      console.log('Usuario no encontrado');
+      }
     })
   }
 

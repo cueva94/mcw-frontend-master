@@ -1,10 +1,9 @@
-<mat-toolbar>
+<mat-toolbar >
         <span class="tilte">My CryptoWallet</span>
         <div class="detail-user">
           <h3> Bienvenido {{user.fullname}}</h3>
           <h3> Deposito: {{user.deposit}} €</h3>
         </div>
-      
         <span class="toolbar-spacer"></span>
         <button mat-raised-button color="warn" (click)="logOut()">cerrar Sesión</button>
 </mat-toolbar>
@@ -25,7 +24,7 @@
       
               <ng-container matColumnDef="value">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor</th>
-                <td mat-cell *matCellDef="let row"> {{row.value}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.value}} €  </td>
               </ng-container>
       
               <ng-container matColumnDef="stock">
@@ -34,7 +33,7 @@
               </ng-container>
               <ng-container matColumnDef="amount">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> cantidad </th>
-                <td mat-cell *matCellDef="let row"> {{row.amount}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.amount}}0 {{row.asset}} </td>
               </ng-container>
               <ng-container matColumnDef="transactions">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Transacciones</th>
