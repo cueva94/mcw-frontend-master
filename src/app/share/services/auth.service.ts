@@ -5,7 +5,7 @@ import { users } from '../interfaces/users';
   providedIn: 'root'
 })
 export class AuthService {
-
+loggedIn : boolean = false
   constructor(private _http: HttpClient ) { }
 
 register(user: users ){
@@ -13,8 +13,12 @@ register(user: users ){
 }
   
 login(user: users){
+  this.loggedIn = true
 return this._http.post('http://localhost:3000/api/users/login', user)
 }
 
+IsAutheticated(){
+  return this.loggedIn
+}
 
 }

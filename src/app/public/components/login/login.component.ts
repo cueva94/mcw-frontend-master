@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     
     this.loginCheck = true;
-    this.loadingCheck = true;
+    this.loadingCheck = false;
 
     this.login = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -48,21 +48,24 @@ export class LoginComponent implements OnInit {
 
 
   onLogin() {
-    
+      this.loadingCheck = true
       this.authService.login(this.login.value).subscribe((resUser) => {
       if (!!resUser) {
-      sessionStorage.setItem('resUser', JSON.stringify(resUser))
+      sessionStorage.setItem('user', JSON.stringify(resUser))
+      console.log(JSON.stringify(resUser))
+      /* if(this.loginCheck)
+      setTimeout(() => {
         this.router.navigate(['dashboard'])
+        this.loadingCheck = false
+      }, 1500) */
          console.log('usuario loggeado');
-         console.log(resUser)
       }else 
       console.log('Usuario no encontrado');
     })
   }
 
   onRegister() {
-    this.submitted = true;
-   
+    this.submitted = true; 
     if (this.registerForm.invalid) {
         return;
     }else
@@ -74,7 +77,7 @@ export class LoginComponent implements OnInit {
           this.loginCheck = !this.loginCheck;
           this.registerForm.reset();
         } else {
-          console.error('Usuario no loggeado.');
+          console.error('Usuario no registrado');
         }
       })
   }
@@ -83,15 +86,5 @@ export class LoginComponent implements OnInit {
     this.loginCheck = !this.loginCheck;
     this.registerForm.reset();
   }
-
-/*    onLoading(){
-    this.loadingCheck = !this.loadingCheck
-
-      if(this.loading = true) 
-     setTimeout(()=>{
-      this.loading = false
-      this.router.navigate(['dashboard'])
-     },3000)
-  }  */ 
  
 }

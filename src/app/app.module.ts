@@ -7,12 +7,15 @@ import { SharedModule } from './share/share.module';
 import { DashboardComponent } from './private/components/dashboard/dashboard.component';
 import { LoginComponent } from './public/components/login/login.component';
 import { DialogBuyComponent } from '../app/private/components/dialog-buy/dialog-buy.component';
+import { DialogSellComponent } from '../app/private/components/dialog-sell/dialog-sell.component';
+import { AuthGuard } from './share/guard/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    DialogBuyComponent
+    DialogBuyComponent,
+    DialogSellComponent
 
 
   ],
@@ -23,7 +26,7 @@ import { DialogBuyComponent } from '../app/private/components/dialog-buy/dialog-
     SharedModule
    
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
