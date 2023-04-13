@@ -112,6 +112,7 @@ loadingCheck: boolean
   
   logOut(){
     sessionStorage.removeItem('user')
+    sessionStorage.clear();
    this.router.navigate(['login'])
   }
 }
